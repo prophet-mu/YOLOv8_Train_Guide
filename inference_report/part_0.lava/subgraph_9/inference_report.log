@@ -1,0 +1,9 @@
+| Pre_alloc OCM            | linebuffer(may SWAP later)   | ringbuffer   | parameter          |
+|:-------------------------|:-----------------------------|:-------------|:-------------------|
+| size(ratio of whole OCM) | 112896(5.4)%                 | 0(0.0)%      | 112128(5.3)%       |
+| range                    | (1872128, 1985024)           | (None, None) | (1985024, 2097152) | 
+
+| Pre_alloc DDR   |   ringbuffer |   feature_swap |
+|:----------------|-------------:|---------------:|
+| size(M)         |         0.00 |           0.00 | 
+
