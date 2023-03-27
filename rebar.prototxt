@@ -1,0 +1,268 @@
+cpu_backend_settings {
+  onnx_setting {
+    mode: DISABLED
+  }
+  axe_setting {
+    mode: ENABLED
+    axe_param {
+      optimize_slim_model: true
+    }
+  }
+}
+tasks {
+  name: "task_0"
+  neuwizard_conf {
+    global_conf {
+      target_hardware: TARGET_HARDWARE_AX620
+    }
+    task_conf {
+      input_path: "/data/onnx/best.onnx"
+      output_path: "/data/model.lava_joint"
+      output_type: OUTPUT_TYPE_JOINT_LAVA_AXE
+    }
+    operator_conf {
+      input_conf_items {
+        selector {
+          op_name: "images"
+        }
+        attributes {
+          input_modifications {
+            dimension_permutation_preprocess {
+              dimensions: 0
+              dimensions: 3
+              dimensions: 1
+              dimensions: 2
+            }
+          }
+        }
+      }
+      input_conf_items {
+        selector {
+        }
+        attributes {
+          color_space {
+            type: CST_RGB
+          }
+        }
+      }
+      input_conf_items {
+        attributes {
+          input_modifications {
+            enforce_integers {
+            }
+          }
+          input_modifications {
+            affine_preprocess {
+              slope: 1.0
+              bias: 0.0
+              slope_divisor: 255.0
+            }
+          }
+        }
+      }
+      output_conf_items {
+        selector {
+          op_name: "output0"
+        }
+        attributes {
+          output_modifications {
+            dimension_permutation_postprocess {
+              dimensions: 0
+              dimensions: 2
+              dimensions: 3
+              dimensions: 1
+            }
+          }
+        }
+      }
+      output_conf_items {
+        selector {
+          op_name: "onnx::ArgMax_342"
+        }
+        attributes {
+          output_modifications {
+            dimension_permutation_postprocess {
+              dimensions: 0
+              dimensions: 2
+              dimensions: 3
+              dimensions: 1
+            }
+          }
+        }
+      }
+      output_conf_items {
+        selector {
+          op_name: "335"
+        }
+        attributes {
+          output_modifications {
+            dimension_permutation_postprocess {
+              dimensions: 0
+              dimensions: 2
+              dimensions: 3
+              dimensions: 1
+            }
+          }
+        }
+      }
+      output_conf_items {
+        selector {
+          op_name: "onnx::ArgMax_357"
+        }
+        attributes {
+          output_modifications {
+            dimension_permutation_postprocess {
+              dimensions: 0
+              dimensions: 2
+              dimensions: 3
+              dimensions: 1
+            }
+          }
+        }
+      }
+      output_conf_items {
+        selector {
+          op_name: "350"
+        }
+        attributes {
+          output_modifications {
+            dimension_permutation_postprocess {
+              dimensions: 0
+              dimensions: 2
+              dimensions: 3
+              dimensions: 1
+            }
+          }
+        }
+      }
+      output_conf_items {
+        selector {
+          op_name: "onnx::ArgMax_327"
+        }
+        attributes {
+          output_modifications {
+            dimension_permutation_postprocess {
+              dimensions: 0
+              dimensions: 2
+              dimensions: 3
+              dimensions: 1
+            }
+          }
+        }
+      }
+      output_conf_items {
+        selector {
+          op_name: "328"
+        }
+        attributes {
+          output_modifications {
+            dimension_permutation_postprocess {
+              dimensions: 0
+              dimensions: 2
+              dimensions: 3
+              dimensions: 1
+            }
+          }
+        }
+      }
+      output_conf_items {
+        selector {
+          op_name: "358"
+        }
+        attributes {
+          output_modifications {
+            dimension_permutation_postprocess {
+              dimensions: 0
+              dimensions: 2
+              dimensions: 3
+              dimensions: 1
+            }
+          }
+        }
+      }
+      output_conf_items {
+        selector {
+          op_name: "343"
+        }
+        attributes {
+          output_modifications {
+            dimension_permutation_postprocess {
+              dimensions: 0
+              dimensions: 2
+              dimensions: 3
+              dimensions: 1
+            }
+          }
+        }
+      }
+    }
+    dataset_conf_train {
+      dataset_conf_items {
+        resize_conf {
+        }
+      }
+    }
+    dataset_conf_calibration {
+      type: DATASET_TYPE_TAR
+      size: 256
+      dataset_conf_items {
+        path: "/data/config/zz.tar"
+        resize_conf {
+        }
+      }
+    }
+    dataset_conf_error_measurement {
+      type: DATASET_TYPE_TAR
+      size: 4
+      batch_size: 1
+      dataset_conf_items {
+        path: "/data/config/zz.tar"
+        resize_conf {
+        }
+      }
+    }
+  }
+  pulsar_conf {
+    batch_size: 1
+    ax620_virtual_npu: AX620_VIRTUAL_NPU_MODE_111
+    output_dir: "/data"
+  }
+  input_model_items {
+    model {
+      path: "/data/onnx/best.onnx"
+      type: MODEL_TYPE_ONNX
+      input_tensors {
+        color_space: TENSOR_COLOR_SPACE_RGB
+      }
+    }
+  }
+  output_model_items {
+    model {
+      path: "/data/zz.joint"
+      type: MODEL_TYPE_JOINT
+      input_tensors {
+        color_space: TENSOR_COLOR_SPACE_RGB
+      }
+      output_tensors {
+        tensor_layout: NHWC
+      }
+    }
+  }
+  target_hardware: TARGET_HARDWARE_AX620
+  cpu_backend_settings {
+    onnx_setting {
+      mode: DISABLED
+    }
+    axe_setting {
+      mode: ENABLED
+      axe_param {
+        optimize_slim_model: true
+      }
+    }
+  }
+  cpu_affine_json {
+    mode: PATH_MODE_ABS
+  }
+}
+input_task_names: "task_0"
+output_task_names: "task_0"
