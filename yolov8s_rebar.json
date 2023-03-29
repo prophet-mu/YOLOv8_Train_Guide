@@ -1,0 +1,10 @@
+{
+    "MODEL_TYPE": "MT_DET_YOLOV8",
+    "MODEL_PATH": "/home/rebar.joint",
+    "CLASS_NAMES": [
+        "rebar"
+    ],
+    "CLASS_NUM": 1,
+    "NMS_THRESHOLD": 0.45,
+    "PROB_THRESHOLD": 0.35
+}
